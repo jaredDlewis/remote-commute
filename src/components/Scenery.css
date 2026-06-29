@@ -1,0 +1,116 @@
+.scenery {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* morning sky gradient sitting behind everything */
+.layer--sky {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    #f7c5a8 0%,
+    #f4d2b0 18%,
+    #e8d6c0 38%,
+    #cfe0d2 62%,
+    #bfe0ec 100%
+  );
+}
+
+/* soft morning sun with a breathing glow */
+.sun {
+  position: absolute;
+  top: 16%;
+  right: 24%;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at center,
+    #fff7e6 0%,
+    #ffe6b8 45%,
+    rgba(255, 224, 170, 0) 72%
+  );
+  filter: blur(2px);
+  animation: sun-glow 8s ease-in-out infinite;
+}
+
+@keyframes sun-glow {
+  0%,
+  100% {
+    opacity: 0.85;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+
+/* --- generic parallax layer scaffolding --- */
+.layer {
+  position: absolute;
+  inset: 0;
+}
+
+.layer__track {
+  position: absolute;
+  inset: 0;
+  width: 200%;
+  display: flex;
+  animation-name: scroll;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.layer__tile {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  flex: 0 0 50%;
+}
+
+.layer__tile svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* stack ordering of the bands (back to front) handled by source order,
+   but nudge the depth with z-index for safety */
+.layer--clouds {
+  z-index: 1;
+}
+.layer--mountains {
+  z-index: 2;
+}
+.layer--hills {
+  z-index: 3;
+}
+.layer--field {
+  z-index: 4;
+}
+.layer--near {
+  z-index: 5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .layer__track {
+    animation: none;
+  }
+  .sun {
+    animation: none;
+  }
+}

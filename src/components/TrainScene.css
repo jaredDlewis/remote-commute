@@ -1,0 +1,169 @@
+.scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #1a1726;
+}
+
+/* Gentle, looping carriage rock. Tiny translation + sway so it never
+   feels nauseating — just enough to suggest a moving train. */
+.shake {
+  position: absolute;
+  inset: -12px; /* bleed so the shake never reveals an edge */
+  animation: rock 4.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes rock {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  15% {
+    transform: translate(-1px, 1px) rotate(-0.12deg);
+  }
+  30% {
+    transform: translate(1px, -1px) rotate(0.1deg);
+  }
+  45% {
+    transform: translate(-1px, 2px) rotate(-0.08deg);
+  }
+  60% {
+    transform: translate(2px, 0) rotate(0.14deg);
+  }
+  75% {
+    transform: translate(-1px, -1px) rotate(-0.1deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+}
+
+/* --- the window opening --- */
+.window {
+  position: absolute;
+  inset: 11% 7% 26% 7%;
+  border-radius: 26px;
+  overflow: hidden;
+  background: #bfe0ec;
+  /* dark rubber gasket, then the warm interior wall painted outward */
+  box-shadow:
+    inset 0 0 0 3px rgba(20, 16, 28, 0.55),
+    0 0 0 10px #3a2f3d,
+    0 0 0 16px #2b2230,
+    0 0 0 9999px #241c2a;
+  animation: micro-judder 0.28s steps(2) infinite;
+}
+
+/* very fine high-frequency vibration of the glass content */
+@keyframes micro-judder {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(0.4px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* soft moving sheen across the glass */
+.window__glass {
+  position: absolute;
+  inset: 0;
+  z-index: 12;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 255, 255, 0) 22%,
+    rgba(255, 255, 255, 0) 60%,
+    rgba(255, 255, 255, 0.08) 72%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  mix-blend-mode: screen;
+}
+
+/* angled sun rays drifting down through the window */
+.window__rays {
+  position: absolute;
+  inset: -20%;
+  z-index: 11;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    66deg,
+    rgba(255, 240, 210, 0) 0px,
+    rgba(255, 240, 210, 0) 38px,
+    rgba(255, 236, 195, 0.14) 46px,
+    rgba(255, 240, 210, 0) 66px
+  );
+  mix-blend-mode: screen;
+  animation: rays 14s ease-in-out infinite alternate;
+}
+
+@keyframes rays {
+  0% {
+    opacity: 0.5;
+    transform: translateX(-2%);
+  }
+  100% {
+    opacity: 0.9;
+    transform: translateX(2%);
+  }
+}
+
+/* --- interior framing details over the wall --- */
+.interior {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+}
+
+/* warm light panel above the window (the luggage-rack valance) */
+.interior__wall--top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 11%;
+  background: linear-gradient(180deg, #3b2f3e 0%, #2b2230 100%);
+  box-shadow: inset 0 -8px 18px rgba(0, 0, 0, 0.3);
+}
+
+/* the foreground sill / tabletop the rider rests at */
+.interior__sill {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 26%;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.25) 100%),
+    linear-gradient(180deg, #4a3b46 0%, #2c2330 60%, #1f1825 100%);
+  box-shadow: inset 0 10px 22px rgba(0, 0, 0, 0.35);
+}
+
+/* a soft tabletop highlight to catch the morning light */
+.interior__sill::before {
+  content: '';
+  position: absolute;
+  top: 14%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(620px, 70%);
+  height: 26px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 226, 190, 0.22),
+    transparent 70%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shake,
+  .window,
+  .window__rays {
+    animation: none;
+  }
+}

@@ -1,0 +1,38 @@
+:root {
+  --ink: #fdf6ec;
+  --ink-soft: rgba(253, 246, 236, 0.72);
+  --glass: rgba(28, 26, 38, 0.32);
+  --glass-strong: rgba(24, 22, 34, 0.5);
+  --accent: #ffcaa0;
+  font-family:
+    'Nunito',
+    'Segoe UI',
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  overflow: hidden;
+  background: #1a1726;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
