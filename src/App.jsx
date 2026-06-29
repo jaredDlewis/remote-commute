@@ -9,7 +9,7 @@ export default function App() {
 
       <div className="ui">
         <header className="ui__header">
-          <h1 className="ui__title">morning commute 2.0</h1>
+          <h1 className="ui__title">morning commute</h1>
           <p className="ui__subtitle">a quiet ride to clear your head</p>
         </header>
 
